@@ -61,7 +61,7 @@ double verifierSolde(Devise devise)
 
 double depotMontant(Devise devise, double montantDepot)
 {
-    // Get the current time
+    // Obtenir l'heure actuelle
     time_t now = time(NULL);
 
     struct tm *local = localtime(&now);
@@ -105,7 +105,7 @@ void effectuerDepot(Devise devise, double montantDepot)
 
 double retraitMontant(Devise devise, double montantRetrait)
 {
-        // Get the current time
+    // Obtenir l'heure actuelle
     time_t now = time(NULL);
 
     struct tm *local = localtime(&now);

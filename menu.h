@@ -13,4 +13,5 @@ void gererDepot();
 // Fonction permettant de traiter les opérations de retrait
 void gererRetrait();
 
+// Fonction permettant d'afficher l'historique des transactions
 void gererTransactions();

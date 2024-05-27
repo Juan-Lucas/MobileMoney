@@ -137,10 +137,10 @@ void gererRetrait()
     effectuerRetrait(devise,montantRetrait);
 }
 
+// Fonction permettant d'afficher l'historique des transactions
+
 void gererTransactions()
 {
-    // Variables pour stocker le choix de la devise de l'utilisateur et le montant du retrait
-    int devise, montantRetrait;
 
     // Afficher le menu
     afficherMenu();
@@ -151,5 +151,4 @@ void gererTransactions()
     printf("\t\tListe des trasanctions effectuees\n\n");
 
     afficherTransactions();
-
 }
