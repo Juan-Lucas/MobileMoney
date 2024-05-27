@@ -1,132 +1,82 @@
 #include <stdio.h>
-#define USD 0
-#define FC 1
+#include "dataTypes.h"
 
-double soldes[2] = {0.0, 0.0};
+// Définir le montant minimum du dépôt en USD
+const double MIN_DEPOT_USD = 5.0;
 
+// Définir le montant minimum du dépôt en Francs Congolais (FC)
+const double MIN_DEPOT_FC = 5000.0;
 
-// Solde
+// Tableau contenant les soldes pour chaque devise
+double soldes[] = {0.0, 0.0};
 
-double soldeUSD()
-{
-    for (int i = 0; i < 2; ++i)
-    {
-        if(i == USD)
-             return soldes[i];
+// Fonction permettant d'obtenir le solde dans une devise spécifique
+
+double getSolde(Devise devise) {
+    // S'assurer que la devise est comprise dans les limites du tableau des soldes.
+    int nombreDevises = sizeof(soldes) / sizeof(soldes[0]);
+    if (devise >= 0 && devise < nombreDevises) {
+        return soldes[devise];
     }
-}
-double soldeFC()
-{
-    for (int i = 0; i < 2; ++i)
-    {
-        if(i == FC)
-            return soldes[i];
-    }
+    return 0.0; // Renvoie une valeur par défaut si la devise n'est pas trouvée
 }
 
-double verifierSolde(int devise)
+// Fonction permettant de vérifier le solde dans une devise spécifique
+
+double verifierSolde(Devise devise)
 {
-    return (devise == USD) ? soldeUSD() : soldeFC();
+    return getSolde(devise);// Retourne le solde de la devise donnée.
+
 }
 
+// Fonction permettant de calculer le nouveau solde après un dépôt dans une devise spécifique
 
-// Depot
-
-double depotUSD(double mnt_depot_usd)
+double depotMontant(Devise devise, double montantDepot)
 {
-    for(int i = 0; i < 2; i++)
-    {
-        if(i == USD)
-        {
-            soldes[i] += mnt_depot_usd;
-            return soldes[i];
-        }
-    }
+    soldes[devise] += montantDepot;
+    return verifierSolde(devise);
 }
 
-double depotFC(double mnt_depot_fc)
+// Fonction permettant d'effectuer une opération de dépôt dans une devise spécifique
+
+void effectuerDepot(Devise devise, double montantDepot)
 {
-    for(int i = 0; i < 2; i++)
+    double minDepot = (devise == USD) ? MIN_DEPOT_USD : MIN_DEPOT_FC;
+    char *deviseCode = (devise == USD) ? "USD" : "FC";
+
+    if (montantDepot > minDepot)
     {
-        if(i == FC)
-        {
-            soldes[i] += mnt_depot_fc;
-            return soldes[i];
-        }
-    }
-}
-
-void effectuerDepot(int devise, double mnt_dpt)
-{
-    if(devise == USD && mnt_dpt > 5)
-    {
-        printf("\nLe depot du montant %.2f USD a ete effectue avec succes. Votre nouveau solde est de %.2f USD\n\n", mnt_dpt,  depotUSD(mnt_dpt));
-    }
-    else if(devise == FC&& mnt_dpt > 5000)
-    {
-        printf("\nLe depot du montant %.2f FC a ete effectue avec succes. Votre nouveau solde est de %.2f FC\n\n", mnt_dpt,  depotFC(mnt_dpt));
-    }else
-    {
-        if(devise == USD)
-        {
-             printf("\nLe montant %.2f USD est insuffisant pour effectuer cette operation.\n\n", mnt_dpt);
-        }
-        else if(devise == FC)
-        {
-             printf("\nLe montant %.2f FC est insuffisant pour effectuer cette operation.\n\n", mnt_dpt);
-        }
-
-    }
-}
-
-
-
-
-// Retrait
-
-double retraitUSD(double mnt_rt_usd)
-{
-    for(int i = 0; i < 2; i++)
-    {
-        if(i == USD)
-        {
-            soldes[i] -= mnt_rt_usd;
-            return soldes[i];
-        }
-    }
-}
-
-double retraitFC(double mnt_rt_fc)
-{
-    for(int i = 0; i < 2; i++)
-    {
-        if(i == FC)
-        {
-            soldes[i] -= mnt_rt_fc;
-            return soldes[i];
-        }
-    }
-}
-
-void effectuerRetrait(int devise, double mnt_rt)
-{
-    if(devise == USD &&  mnt_rt < verifierSolde(devise)  && verifierSolde(devise) > 0)
-    {
-        printf("\nLe retrait du montant %.2f USD a ete effectue avec succes. Votre nouveau solde est de %.2f USD\n\n", mnt_rt,  retraitUSD(mnt_rt));
-    }
-    else if(devise == FC  &&  mnt_rt < verifierSolde(devise)  && verifierSolde(devise) > 0)
-    {
-        printf("\nLe retrait du montant %.2f FC a ete effectue avec succes. Votre nouveau solde est de %.2f FC\n\n", mnt_rt,  retraitFC(mnt_rt));
+        printf("\nLe depot du montant %.2f %s a ete effectue avec succes. Votre nouveau solde est de %.2f %s\n\n",
+               montantDepot, deviseCode, depotMontant(devise, montantDepot), deviseCode);
     }
     else
     {
-        printf("\nVotre solde est insuffisant pour effectuer cette operation.\n\n");
+        printf("\nLe montant %.2f %s est insuffisant pour effectuer cette operation.\n\n",
+               montantDepot, deviseCode);
     }
 }
 
+// Fonction permettant de calculer le nouveau solde après un retrait dans une devise spécifique
 
-// Historiques
+double retraitMontant(Devise devise, double montantRetrait)
+{
+    soldes[devise] -= montantRetrait;
+    return verifierSolde(devise);
+}
 
+// Fonction permettant d'effectuer une opération de retrait dans une devise spécifique
 
+void effectuerRetrait(Devise devise, double montantRetrait)
+{
+    double nouveauSolde = retraitMontant(devise, montantRetrait);
+    char *deviseCode = (devise == USD) ? "USD" : "FC";
+
+    if (montantRetrait < verifierSolde(devise) && verifierSolde(devise) > 0) {
+        printf("\nLe retrait du montant %.2f %s a ete effectue avec succes. Votre nouveau solde est de %.2f %s\n\n",
+                montantRetrait, deviseCode, nouveauSolde, deviseCode);
+    } else {
+        printf("\nVotre solde est insuffisant pour effectuer cette operation.\n\n");
+    }
+}
 
 

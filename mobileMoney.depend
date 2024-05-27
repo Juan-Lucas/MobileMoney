@@ -1,20 +1,22 @@
 # depslib dependency file v1.0
-1716539643 source:d:\all\devs\learning - c\mobilemoney\main.c
+1716730972 source:d:\all\devs\learning - c\mobilemoney\main.c
 	<stdio.h>
 	<stdlib.h>
 	"menu.h"
 
 1716511820 d:\all\devs\learning - c\mobilemoney\menu.h
 
-1716516443 source:d:\all\devs\learning - c\mobilemoney\operations.c
+1716795699 source:d:\all\devs\learning - c\mobilemoney\operations.c
 	<stdio.h>
+	"dataTypes.h"
 
 1716541482 source:d:\all\devs\learning - c\mobilemoney\menu.c
 	<stdio.h>
 	<stdlib.h>
 	"operations.h"
 
-1716510786 d:\all\devs\learning - c\mobilemoney\operations.h
+1716795692 d:\all\devs\learning - c\mobilemoney\operations.h
+	"dataTypes.h"
 
 1716512378 source:d:\all\devs\learning - c\mobilemoney\depot.c
 	"devises.h"
@@ -30,4 +32,6 @@
 1716518355 d:\all\devs\learning - c\mobilemoney\cta.h
 
 1716518398 source:d:\all\devs\learning - c\mobilemoney\cta.c
+
+1716795677 d:\all\devs\learning - c\mobilemoney\datatypes.h
 
