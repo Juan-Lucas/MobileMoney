@@ -5,7 +5,8 @@
 #include "menu.h"
 
 // Fonction permettant d'afficher le menu et de gérer les choix de l'utilisateur
-void menu() {
+void menu()
+{
     // Variable pour stocker le choix de l'utilisateur
     int choix;
 
@@ -37,9 +38,13 @@ void menu() {
                 // Si l'utilisateur a choisi l'option 2, traiter les transactions de retrait
                 gererRetrait();
                 break;
+            case 3:
+                 // Si l'utilisateur a choisi l'option 3, afficher l'historique des transactions
+                gererTransactions();
+                break;
             default:
                 // Si l'utilisateur a choisi une autre option, dire au revoir et sortir
                 printf("\n Au revoir !\n");
         }
-    } while (choix != 3);
+    } while (choix != 4);
 }

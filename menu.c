@@ -1,6 +1,9 @@
 #include <stdio.h>
 
+#include <stdlib.h>
+
 #include "operations.h"
+
 
 // Fonction permettant d'afficher le menu principal
 
@@ -12,7 +15,8 @@ void afficherMenu()
     printf("0. Verifier le solde.\n");
     printf("1. Effectuer un depot.\n");
     printf("2. Effectuer un retrait.\n");
-    printf("3. Sortir du programme.\n");
+    printf("3. Afficher les transactions.\n");
+    printf("4. Sortir du programme.\n");
     printf("\n\n");
 }
 
@@ -37,6 +41,14 @@ void gererSoldes()
     // Afficher le menu
     afficherMenu();
 
+    // Effacer la console
+    system("cls");
+
+    printf("\t\tVerifier votre solde\n\n");
+
+    // Afficher option devise
+    afficherDevisesOptions();
+
     // Invite l'utilisateur à choisir une devise
     printf("Choisissez une option :");
 
@@ -46,11 +58,11 @@ void gererSoldes()
     // Gérer le choix de l'utilisateur
     switch(devise)
     {
-        case USD:
+        case 0:
             // Si l'utilisateur a choisi USD, imprimer le solde en USD
             printf("\nVotre solde en USD est de %.2f USD\n\n\n", verifierSolde(devise));
             break;
-        case FC:
+        case 1:
             // Si l'utilisateur a choisi FC, imprimer le solde en FC
             printf("\nVotre solde en FC est de %.2f FC\n\n\n", verifierSolde(devise));
             break;
@@ -66,6 +78,14 @@ void gererDepot()
 
     // Afficher le menu
     afficherMenu();
+
+    // Effacer la console
+    system("cls");
+
+    printf("\t\tEffectuer un depot\n\n");
+
+    // Afficher option devise
+    afficherDevisesOptions();
 
     // Inviter l'utilisateur à choisir une devise
     printf("Choisissez une option :");
@@ -93,6 +113,14 @@ void gererRetrait()
     // Afficher le menu
     afficherMenu();
 
+    // Effacer la console
+    system("cls");
+
+    printf("\t\tEffectuer un retrait\n\n");
+
+    // Afficher option devise
+    afficherDevisesOptions();
+
     // Inviter l'utilisateur à choisir une devise
     printf("Choisissez une option :");
 
@@ -107,4 +135,21 @@ void gererRetrait()
 
     // Effectuer l'opération de retrait
     effectuerRetrait(devise,montantRetrait);
+}
+
+void gererTransactions()
+{
+    // Variables pour stocker le choix de la devise de l'utilisateur et le montant du retrait
+    int devise, montantRetrait;
+
+    // Afficher le menu
+    afficherMenu();
+
+    // Effacer la console
+    system("cls");
+
+    printf("\t\tListe des trasanctions effectuees\n\n");
+
+    afficherTransactions();
+
 }

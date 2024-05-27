@@ -1,22 +1,24 @@
 # depslib dependency file v1.0
-1716730972 source:d:\all\devs\learning - c\mobilemoney\main.c
+1716802620 source:d:\all\devs\learning - c\mobilemoney\main.c
 	<stdio.h>
 	<stdlib.h>
-	"menu.h"
+	"starter.h"
 
-1716511820 d:\all\devs\learning - c\mobilemoney\menu.h
+1716808850 d:\all\devs\learning - c\mobilemoney\menu.h
 
-1716795699 source:d:\all\devs\learning - c\mobilemoney\operations.c
+1716812080 source:d:\all\devs\learning - c\mobilemoney\operations.c
 	<stdio.h>
-	"dataTypes.h"
+	<stdlib.h>
+	<time.h>
+	"constants.h"
+	"dataStores.h"
 
-1716541482 source:d:\all\devs\learning - c\mobilemoney\menu.c
+1716811907 source:d:\all\devs\learning - c\mobilemoney\menu.c
 	<stdio.h>
 	<stdlib.h>
 	"operations.h"
 
-1716795692 d:\all\devs\learning - c\mobilemoney\operations.h
-	"dataTypes.h"
+1716811247 d:\all\devs\learning - c\mobilemoney\operations.h
 
 1716512378 source:d:\all\devs\learning - c\mobilemoney\depot.c
 	"devises.h"
@@ -33,5 +35,17 @@
 
 1716518398 source:d:\all\devs\learning - c\mobilemoney\cta.c
 
-1716795677 d:\all\devs\learning - c\mobilemoney\datatypes.h
+1716810700 d:\all\devs\learning - c\mobilemoney\datatypes.h
+
+1716799207 d:\all\devs\learning - c\mobilemoney\starter.h
+
+1716811414 source:d:\all\devs\learning - c\mobilemoney\starter.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+
+1716810376 d:\all\devs\learning - c\mobilemoney\constants.h
+
+1716811739 d:\all\devs\learning - c\mobilemoney\datastores.h
+	<stdlib.h>
 

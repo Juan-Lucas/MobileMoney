@@ -32,12 +32,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="constants.h" />
+		<Unit filename="dataStores.h" />
+		<Unit filename="dataTypes.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.c">
 			<Option compilerVar="CC" />
-			<Option virtualFolder="starter/" />
 		</Unit>
 		<Unit filename="menu.h" />
 		<Unit filename="operations.c">
@@ -45,6 +47,11 @@
 			<Option virtualFolder="operations/" />
 		</Unit>
 		<Unit filename="operations.h" />
+		<Unit filename="starter.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="starter/" />
+		</Unit>
+		<Unit filename="starter.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

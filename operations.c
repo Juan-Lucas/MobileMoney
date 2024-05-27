@@ -1,14 +1,42 @@
 #include <stdio.h>
-#include "dataTypes.h"
 
-// Définir le montant minimum du dépôt en USD
-const double MIN_DEPOT_USD = 5.0;
+#include <stdlib.h>
 
-// Définir le montant minimum du dépôt en Francs Congolais (FC)
-const double MIN_DEPOT_FC = 5000.0;
+#include <time.h>
 
-// Tableau contenant les soldes pour chaque devise
-double soldes[] = {0.0, 0.0};
+#include "constants.h"
+
+#include "dataStores.h"
+
+int taille = 0;
+
+// Fonction permettant d'enregistrer toutes les transactions effectuees
+
+struct Transaction* enregistrerTransaction(struct Transaction* transactions, int* taille,struct Transaction n_transaction)
+{
+    (*taille)++;
+
+    transactions = realloc(transactions, (*taille)* sizeof(struct Transaction));
+
+    transactions[(*taille) - 1] = n_transaction;
+
+    return transactions;
+}
+
+// Fonction permettant d'afficher toutes les transactions effectuees
+
+void afficherTransactions()
+{
+    for (int i = 0; i < taille; i++) {
+        printf("Transaction %d:\n", i + 1);
+        printf("Date: %d/%d/%d\n", transactions[i].date.jour, transactions[i].date.mois, transactions[i].date.annee);
+        printf("Montant: %.2f\n", transactions[i].montant);
+        printf("Devise: %s\n", transactions[i].devise == USD ? "USD" : "FC");
+        printf("Type: %s\n", transactions[i].type == DEPOT ? "DEPOT" : "RETRAIT");
+        printf("\n");
+    }
+}
+
 
 // Fonction permettant d'obtenir le solde dans une devise spécifique
 
@@ -33,7 +61,24 @@ double verifierSolde(Devise devise)
 
 double depotMontant(Devise devise, double montantDepot)
 {
+    // Get the current time
+    time_t now = time(NULL);
+
+    struct tm *local = localtime(&now);
+
+    struct Transaction transaction;
+
+    transaction.date.jour = local->tm_mday;
+    transaction.date.mois = local->tm_mon + 1;
+    transaction.date.annee = local->tm_year + 1900;
+    transaction.montant = montantDepot;
+    transaction.devise = devise;
+    transaction.type= DEPOT;
+
+    transactions = enregistrerTransaction(transactions, &taille, transaction);
+
     soldes[devise] += montantDepot;
+
     return verifierSolde(devise);
 }
 
@@ -60,7 +105,24 @@ void effectuerDepot(Devise devise, double montantDepot)
 
 double retraitMontant(Devise devise, double montantRetrait)
 {
+        // Get the current time
+    time_t now = time(NULL);
+
+    struct tm *local = localtime(&now);
+
+    struct Transaction transaction;
+
+    transaction.date.jour = local->tm_mday;
+    transaction.date.mois = local->tm_mon + 1;
+    transaction.date.annee = local->tm_year + 1900;
+    transaction.montant = montantRetrait;
+    transaction.devise = devise;
+    transaction.type= RETRAIT;
+
+    transactions = enregistrerTransaction(transactions, &taille, transaction);
+
     soldes[devise] -= montantRetrait;
+
     return verifierSolde(devise);
 }
 
@@ -78,5 +140,6 @@ void effectuerRetrait(Devise devise, double montantRetrait)
         printf("\nVotre solde est insuffisant pour effectuer cette operation.\n\n");
     }
 }
+
 
 
