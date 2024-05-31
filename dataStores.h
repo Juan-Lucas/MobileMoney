@@ -32,6 +32,6 @@ struct Transaction
 // Tableau contenant les soldes pour chaque devise
 double soldes[] = {0.0, 0.0};
 
-// Tableau contenant les soldes pour chaque devise
+// Tableau contenant les transactions pour toutes les devises
 struct Transaction* transactions = NULL;
 

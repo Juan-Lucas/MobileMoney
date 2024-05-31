@@ -130,10 +130,11 @@ double retraitMontant(Devise devise, double montantRetrait)
 
 void effectuerRetrait(Devise devise, double montantRetrait)
 {
-    double nouveauSolde = retraitMontant(devise, montantRetrait);
+    double nouveauSolde;
     char *deviseCode = (devise == USD) ? "USD" : "FC";
 
-    if (montantRetrait < verifierSolde(devise) && verifierSolde(devise) > 0) {
+    if (verifierSolde(devise) > 0) {
+        nouveauSolde = retraitMontant(devise, montantRetrait);
         printf("\nLe retrait du montant %.2f %s a ete effectue avec succes. Votre nouveau solde est de %.2f %s\n\n",
                 montantRetrait, deviseCode, nouveauSolde, deviseCode);
     } else {
